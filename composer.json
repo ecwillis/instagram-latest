@@ -1,0 +1,24 @@
+{
+    "name": "glasscow/instagram-latest",
+    "description": "A Utility to gather latest Instagram Posts",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eric Willis",
+            "email": "eric@glasscow.media"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "InstagramLatest\\" : "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "jms/serializer": "^1.11"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    }
+}
