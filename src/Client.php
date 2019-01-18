@@ -28,7 +28,7 @@ class Client {
     if (strlen($payload) < 100) {
       throw new \Error('Invalid Payload');
     }
-    preg_match_all('/"shortcode":"([A-Za-z]\w+)"/', $payload, $out);
+    preg_match_all('/"shortcode":"([A-Za-z_\-0-9]+)"/', $payload, $out);
 
     return $out;
   }
@@ -46,6 +46,7 @@ class Client {
 
   protected function _getEmbeds($shortcodes) {
     $return = [];
+    $gTest = new GClient();
     foreach($shortcodes as $code) {
       $resp = $this->gce->get('oembed', [
         'query' => [
@@ -55,7 +56,11 @@ class Client {
       ]);
 
       $js = $this->_handleResponse($resp);
-      $return[] = $js;
+      
+      try {
+        $testResp = $gTest->head($js->thumbnail_url);
+        $return[] = $js;
+      } catch( \Exception $e) {}
     }
 
     return $return;
